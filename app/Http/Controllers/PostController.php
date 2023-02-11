@@ -2,17 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostListResource;
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     //Вывод всех постов
+//    public function index()
+//    {
+//        $posts = Post::all();
+//        $result = [];
+//
+//        foreach($posts as $key => $post) {
+//            $result[$key] = [
+//                'name' => $post->name,
+//                'title' => $post->title,
+//                'description' => $post->description,
+//                'views' => $post->views,
+//                'author' => Author::find($post->author_id)->full_name,
+//                'category' => Category::find($post->category_id)->name
+//            ];
+//        }
+//
+//        return [
+//        "data" => $result
+//         ];
+//
+//    }
+
     public function index()
     {
-//        $posts = Post::all();
-        return Post::all();
+        $posts = Post::where('view', '>', '2')->get();
+        return PostListResource::collection($posts);
     }
 
 //    public function show($id)
@@ -53,7 +77,7 @@ class PostController extends Controller
         $post->delete();
 
         return [
-          "deleted" => true
+            "deleted" => true
         ];
     }
 

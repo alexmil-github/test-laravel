@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
         DB::table('authors')->insert([
             'full_name' => Str::random(10),
         ]);
+        DB::table('categories')->insert([
+            'name' => Str::random(10),
+        ]);
 
 
         // \App\Models\User::factory(10)->create();

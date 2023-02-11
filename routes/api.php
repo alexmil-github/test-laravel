@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Route::get('/post', [\App\Http\Controllers\PostController::class, 'index']);
 
-Route::get('/post', [PostController::class, 'index']); //Выод всех постов
+Route::get('/post', [PostController::class, 'index']); //Вывод всех постов
 Route::get('/post/{post}', [PostController::class, 'show']); //Вывод одного поста
 Route::post('/post', [PostController::class, 'store']); //Создание поста
 Route::patch('/post/{post}', [PostController::class, 'update']); // Редактирование поста

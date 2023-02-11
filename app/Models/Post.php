@@ -15,6 +15,12 @@ class Post extends Model
         'author_id',
     ];
 
+    protected $hidden = [
+      'id',
+      'created_at',
+      'updated_at'
+    ];
+
     public function author()
     {
         return $this->belongsTo(Author::class);
