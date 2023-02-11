@@ -64,4 +64,10 @@ class PostController extends Controller
         return $author->posts;
     }
 
+    public function author(Post $post)
+    {
+        $author = $post->author;
+        return $author->full_name;
+    }
+
 }

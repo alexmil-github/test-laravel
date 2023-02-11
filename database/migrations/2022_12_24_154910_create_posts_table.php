@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('title');
             $table->string('description');
             $table->foreignId('author_id')->constrained('authors')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
 
             $table->timestamps();
         });
