@@ -13,9 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return ('Привет!');
-});
 
-Route::get('/post', [\App\Http\Controllers\PostController::class, 'index']);
+
+Route::get('/', [\App\Http\Controllers\SiteController::class, 'page_index']);
+Route::get('/home', [\App\Http\Controllers\SiteController::class, 'page_home']);
+Route::get('/about', [\App\Http\Controllers\SiteController::class, 'page_about']);
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'page_index']);
+Route::get('/login', [\App\Http\Controllers\SiteController::class, 'loginForm']);
+Route::post('/login', [\App\Http\Controllers\SiteController::class, 'login'])->name('login');
+
+
+
+
+
+
+
+
+
 
