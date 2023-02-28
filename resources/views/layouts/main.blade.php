@@ -11,8 +11,15 @@
 
 <header>
     Шапка
-{{--    <a href="{{ route('login') }}">Войти</a>--}}
-    <a href="/login">Войти</a>
+
+    @guest()
+        <a href="{{ route('login') }}">Войти</a>
+    @endguest
+
+    @auth()
+        <a href="{{ route('logout') }}">Выйти</a>
+    @endauth
+
     <hr>
 </header>
 

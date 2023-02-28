@@ -20,8 +20,16 @@
             @enderror
         </div>
 
+        <div>
+            @error('error')
+            <small>{{$message}}</small>
+            @enderror
+        </div>
+
         <button>Войти</button>
 
     </form>
+
+    <a href="/register">Регистрация</a>
 
 @endsection

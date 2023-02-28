@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SiteController extends Controller
 {
@@ -30,6 +32,11 @@ class SiteController extends Controller
         return view('login');
     }
 
+    public function registerForm()
+    {
+        return view('register');
+    }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -41,10 +48,37 @@ class SiteController extends Controller
             return redirect('/home');
 
         return back()->withErrors([
-           'email' => 'Email or password incorrect'
+           'error' => 'Email or password incorrect'
         ]);
 
 
 
+    }
+    public function register(Request $request)
+    {
+        $request->validate([
+           'email' => 'required|email|max:255',
+           'password' => 'required|min:6',
+           'name' => 'required|string',
+        ]);
+
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+         return redirect('/login');
+
+
+
+
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }
