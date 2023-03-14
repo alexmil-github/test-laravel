@@ -13,6 +13,7 @@ class Post extends Model
         'title',
         'description',
         'author_id',
+        'category_id',
     ];
 
     protected $hidden = [

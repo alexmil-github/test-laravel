@@ -35,7 +35,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::where('view', '>', '2')->get();
+        $posts = Post::all();
         return PostListResource::collection($posts);
     }
 

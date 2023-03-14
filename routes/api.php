@@ -30,3 +30,6 @@ Route::get('/author/{author}/posts', [PostController::class, 'posts']); //выв
 Route::get('/post/{post}/author', [PostController::class, 'author']); //вывод автора определенного поста
 
 Route::resource('category', \App\Http\Controllers\CategoryController::class);
+
+Route::post('/login', [\App\Http\Controllers\LoginApiController::class, 'login']);
+Route::get('/logout', [\App\Http\Controllers\LoginApiController::class, 'logout'])->middleware('auth:api');
