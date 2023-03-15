@@ -1,35 +1,44 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>Войдите</h1>
+    <div class="container">
 
-    <form method="post">
-        @csrf
+        <form method="post" class="form-style-10">
+            @csrf
 
-        <div>
-            <input type="text" name="email" value="{{ old('email') }}">
-            @error('email')
-            <small>{{$message}}</small>
-            @enderror
-        </div>
 
-        <div>
-            <input type="password" name="password" value="{{ old('password') }}">
-            @error('password')
-            <small>{{$message}}</small>
-            @enderror
-        </div>
 
-        <div>
-            @error('error')
-            <small>{{$message}}</small>
-            @enderror
-        </div>
+            <div class="inner-wrap">
+                <label>Email
+                    <input type="text" name="email" value="{{ old('email') }}">
+                </label>
+                @error('email')
+                <small>{{$message}}</small>
+                @enderror
 
-        <button>Войти</button>
+                <label>Password
+                    <input type="password" name="password" value="{{ old('password') }}">
+                </label>
+                @error('password')
+                <small>{{$message}}</small>
+                @enderror
 
-    </form>
+            </div>
 
-    <a href="/register">Регистрация</a>
+            <div>
+                @error('error')
+                <small>{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="button-section">
+                <input type="submit" value="Войти"/>
+            </div>
+            <br>
+            <a href="/register" >Регистрация</a>
+        </form>
+
+
+    </div>
 
 @endsection

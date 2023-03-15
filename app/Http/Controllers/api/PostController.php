@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\PostListResource;
 use App\Models\Author;
-use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 

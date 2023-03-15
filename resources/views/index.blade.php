@@ -1,18 +1,21 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>Главная страница блога</h1>
+    <div class="container">
+        <h1>Главная страница блога</h1>
 
-    <h4>Посты:</h4>
+        <h4>Посты:</h4>
 
-    <ul>
-
-
-        @foreach($posts as $post)
-            <li>{{ $post->name }}</li>
-        @endforeach
+        <ul>
 
 
-    </ul>
+            @foreach($posts as $post)
+                <li>{{ $post->name }}</li>
+            @endforeach
+
+
+        </ul>
+    </div>
+
 
 @endsection

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class SiteController extends Controller
 {
@@ -24,7 +25,11 @@ class SiteController extends Controller
 
     public function page_home()
     {
-        return (view('home'));
+        $posts = Post::where([
+            'author_id' => Auth::user()->author->id,
+        ])->get();
+
+        return (view('home', ['posts' => $posts]));
     }
 
     public function loginForm()
@@ -40,38 +45,46 @@ class SiteController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-           'email' => 'required|email',
-           'password' => 'required'
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
-        if(Auth::attempt($request->only(['email', 'password'])))
+        if (Auth::attempt($request->only(['email', 'password'])))
             return redirect('/home');
 
         return back()->withErrors([
-           'error' => 'Email or password incorrect'
+            'error' => 'Email or password incorrect'
         ]);
-
 
 
     }
+
     public function register(Request $request)
     {
+
         $request->validate([
-           'email' => 'required|email|max:255',
-           'password' => 'required|min:6',
-           'name' => 'required|string',
+            'email' => 'required|email|unique:users|max:255',
+//           'password' => 'required|min:6',
+            'password' => ['required', 'confirmed',
+                Password::min(6)
+                    ->letters() // Требуется хотя бы одна буква ...
+                    ->mixedCase() // Требуется хотя бы одна заглавная и одна строчная буква...
+                    ->numbers() // Требуется хотя бы одна цифра...
+                    ->symbols() // Требуется хотя бы один символ...
+            ],
+            'password_confirmation' => 'required',
+            'name' => 'required|string',
         ]);
 
 
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
 
-         return redirect('/login');
 
-
+        return redirect('/login');
 
 
     }

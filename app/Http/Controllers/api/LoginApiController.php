@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ class LoginApiController extends Controller
 {
     public function login(Request $request)
     {
-//        dd($request);
+
         $user = User::where([
             'email' => $request->email,
         ])->first();

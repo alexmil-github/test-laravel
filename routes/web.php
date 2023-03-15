@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [\App\Http\Controllers\SiteController::class, 'page_home']);
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'page_index']);
     Route::get('/logout', [\App\Http\Controllers\SiteController::class, 'logout'])->name('logout');
+
+    Route::resource('post', \App\Http\Controllers\PostController::class );
 });
 
 
