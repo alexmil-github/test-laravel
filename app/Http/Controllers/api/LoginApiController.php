@@ -18,6 +18,7 @@ class LoginApiController extends Controller
             'email' => $request->email,
         ])->first();
 
+
         if($user && Hash::check($request->password, $user->password)){
             $user->remember_token = Str::random(16);
             $user->save();

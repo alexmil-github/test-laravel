@@ -25,12 +25,14 @@ Route::post('/register', [\App\Http\Controllers\SiteController::class, 'register
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [\App\Http\Controllers\SiteController::class, 'page_home']);
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'page_index']);
     Route::get('/logout', [\App\Http\Controllers\SiteController::class, 'logout'])->name('logout');
 
     Route::resource('post', \App\Http\Controllers\PostController::class );
+
 });
+
+Route::get('/home', [\App\Http\Controllers\SiteController::class, 'page_home'])->name('home')->middleware(['auth','checkblacklist']);
 
 
 

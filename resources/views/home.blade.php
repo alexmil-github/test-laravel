@@ -16,17 +16,36 @@
                 <th>Description</th>
                 <th>Category</th>
                 <th>Author</th>
+                <th></th>
                 </thead>
                 <tbody>
                 @foreach($posts as $key=>$post)
 
                     <tr>
                         <td>{{$key+1}}</td>
-                        <td>{{ $post->name }}</td>
+                        <td><a href="post/{{$post->id}}">{{ $post->name }}</a></td>
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->description }}</td>
                         <td>{{ $post->category->name }}</td>
                         <td>{{ $post->author->full_name }}</td>
+                        <td>
+                            <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="POST">
+                                @csrf
+
+                                @method('DELETE')
+
+                                <button type="submit" class="btn-2">Удалить</button>
+                            </form>
+                            <form action="{{ route('post.edit', ['post' => $post->id]) }}" method="GET">
+                                @csrf
+
+                                @method('PATCH')
+
+                                <button type="submit" class="btn-2">Редактировать</button>
+                            </form>
+
+
+                        </td>
                     </tr>
 
                 @endforeach

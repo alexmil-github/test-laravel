@@ -25,9 +25,14 @@ class SiteController extends Controller
 
     public function page_home()
     {
-        $posts = Post::where([
-            'author_id' => Auth::user()->author->id,
-        ])->get();
+
+        if (!Auth::user()->author == null) {
+            $posts = Post::where([
+                'author_id' => Auth::user()->author->id,
+            ])->get();
+        } else {
+            $posts = [];
+        }
 
         return (view('home', ['posts' => $posts]));
     }

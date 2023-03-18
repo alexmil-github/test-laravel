@@ -6,8 +6,6 @@
         <form method="post" class="form-style-10">
             @csrf
 
-
-
             <div class="inner-wrap">
                 <label>Email
                     <input type="text" name="email" value="{{ old('email') }}">
