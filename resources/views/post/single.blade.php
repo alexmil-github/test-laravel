@@ -5,7 +5,7 @@
 
         id: {{$post->id}}
         <br>
-        Название поста: {{$post->title}}
+        Заголовок поста: {{$post->title}}
         <br>
         Текст поста: {{$post->description}}
         <br>

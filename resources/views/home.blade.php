@@ -2,6 +2,8 @@
 
 @section('content')
 
+    @include('toastr')
+
     <div class="container">
 
         <h1>Домашняя страница авторизованного пользователя</h1>
@@ -31,18 +33,20 @@
                         <td>
                             <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="POST">
                                 @csrf
-
                                 @method('DELETE')
 
                                 <button type="submit" class="btn-2">Удалить</button>
                             </form>
-                            <form action="{{ route('post.edit', ['post' => $post->id]) }}" method="GET">
-                                @csrf
+{{--                            <form action="{{ route('post.edit', ['post' => $post->id]) }}" method="GET">--}}
+{{--                            <form action="/post/{{ $post->id }}/edit" method="GET">--}}
+{{--                                @csrf--}}
 
-                                @method('PATCH')
+{{--                                @method('PATCH')--}}
 
-                                <button type="submit" class="btn-2">Редактировать</button>
-                            </form>
+{{--                                <button type="submit" class="btn-2">Редактировать</button>--}}
+{{--                            </form>--}}
+                            <a type="button" href="/post/{{ $post->id }}/edit" class="btn-2">Редактировать</a>
+
 
 
                         </td>
@@ -55,7 +59,7 @@
 
         <h3>Добавить новый пост</h3>
 
-        <form class="form-style-10" action="/post" method="POST">
+        <form class="form-style-10" action="/post" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="section"><span>1</span>Name</div>
@@ -92,6 +96,15 @@
                     </select>
                 </label>
             </div>
+
+            <div class="section"><span>4</span>Photo</div>
+            <div class="inner-wrap">
+                <label>Photo <input type="file" name="photo_file"/></label>
+                @error('photo_file')
+                <small>{{$message}}</small>
+                @enderror
+            </div>
+
 
             <div class="button-section">
                 <input type="submit" name="Sign Up"/>

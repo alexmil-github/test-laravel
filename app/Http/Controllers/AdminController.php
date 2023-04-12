@@ -10,11 +10,11 @@ class AdminController extends Controller
 {
    public function page_index()
    {
-       if (Auth::user()->is_admin == 1) {
-           return (view('admin.index'));
-       } else {
-           return redirect('/home');
-       }
-
+//       if (Auth::user()->is_admin == 1) {
+//           return (view('admin.index'));
+//       } else {
+//           return redirect('/home');
+//       }
+       return (view('admin.index'));
    }
 }

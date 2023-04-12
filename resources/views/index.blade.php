@@ -9,7 +9,7 @@
                 <article>
                     <div class="article-wrapper">
                         <figure>
-                            <img src="https://picsum.photos/id/1011/800/450" alt="" />
+                            <img src='public/storage/{{$post->photo}}' alt="" />
                         </figure>
                         <div class="article-body">
                             <h2>{{ $post->title }}</h2>

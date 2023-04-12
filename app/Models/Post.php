@@ -14,6 +14,7 @@ class Post extends Model
         'description',
         'author_id',
         'category_id',
+        'photo',
     ];
 
     protected $hidden = [

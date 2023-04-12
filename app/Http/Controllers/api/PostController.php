@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PostListResource;
 use App\Models\Author;
 use App\Models\Post;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class PostController extends Controller
 {
@@ -54,6 +57,14 @@ class PostController extends Controller
     //Создание поста
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+            'category_id' => 'required|integer|exist:categories,id',
+            'author_id' => 'required|integer|exist:authors,id'
+        ]);
+
 
         return Post::create($request->all());
     }

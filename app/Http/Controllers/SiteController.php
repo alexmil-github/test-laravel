@@ -55,6 +55,7 @@ class SiteController extends Controller
         ]);
 
         if (Auth::attempt($request->only(['email', 'password'])))
+            session()->flash('error','Успешный вход! Здравствуйте, '.Auth::user()->name);
             return redirect('/home');
 
         return back()->withErrors([
@@ -82,11 +83,13 @@ class SiteController extends Controller
         ]);
 
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+
+        $user->assignRole('writer');
 
 
         return redirect('/login');
